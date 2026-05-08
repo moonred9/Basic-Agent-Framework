@@ -6,3 +6,9 @@
 3. 环境响应 (Environment Response)： 系统返回检索到的文档chunk，并以 <tool_response> 的形式反馈给模型。
 4. 多轮迭代 (Iterative Interaction)： 重复上述过程，将新获取的证据整合进上下文。模型被设置为最高支持 10 轮 交互。
 5. 最终回答 (Final Answer)： 当智能体认为已收集足够信息后，在 <answer> 标签中给出简洁的最终答案。
+
+
+
+
+
+
