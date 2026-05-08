@@ -676,3 +676,19 @@ LLM 第二次返回：
 - Tool 只负责执行动作，不控制循环。
 - `answer` 是一个普通 tool，但 Agent 对它有特殊终止规则。
 - LLM 输出解析集中在 `OutputParser`，避免散落在 Agent 循环中。
+
+
+# 将 GPU1 改为 GPU2 (或者任何不重复的字符串)
+CUDA_VISIBLE_DEVICES=3 \
+VLLM_OBJECT_STORAGE_SHM_BUFFER_NAME=VLLM_OBJECT_STORAGE_SHM_BUFFER_GPU3 \
+vllm serve /data/pjj/llm/GLM-4.6V-Flash \
+  --served-model-name glm-4.6v \
+  --tensor-parallel-size 1 \
+  --tool-call-parser glm45 \
+  --reasoning-parser glm45 \
+  --enable-auto-tool-choice \
+  --allowed-local-media-path / \
+  --mm-encoder-tp-mode data \
+  --mm-processor-cache-type shm \
+  --host 10.130.140.30 \
+  --port 18804

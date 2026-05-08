@@ -13,7 +13,7 @@ class OutputParserTest(unittest.TestCase):
             LLMResponse(
                 content=(
                     "<think>Need search.</think>\n"
-                    '<tool_call>{"name": "search", "arguments": {"query": "x"}}</tool_call>'
+                    '<action>{"name": "search", "arguments": {"query": "x"}}</action>'
                 )
             )
         )

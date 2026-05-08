@@ -2,8 +2,6 @@ from __future__ import annotations
 
 from typing import Protocol
 
-from openai import OpenAI
-
 from basic_agent_framework.context.message import Message
 from basic_agent_framework.llm.schemas import LLMResponse
 
@@ -26,6 +24,12 @@ class OpenAILLMClient:
         self.model = model
         self.temperature = temperature
         self.max_tokens = max_tokens
+        try:
+            from openai import OpenAI
+        except ImportError as exc:
+            raise ImportError(
+                "OpenAILLMClient requires the 'openai' package to be installed."
+            ) from exc
         self.client = OpenAI(api_key=api_key, base_url=base_url)
 
     def generate(self, messages: list[Message]) -> LLMResponse:

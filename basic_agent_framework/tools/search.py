@@ -30,12 +30,20 @@ class StaticSearchBackend:
         return [document for _, document in scored[:top_k]]
 
 
+class FixedSearchBackend:
+    def __init__(self, results: list[str] | None = None) -> None:
+        self.results = results or ["100 is the answer ."]
+
+    def search(self, query: str, *, top_k: int = 5) -> list[str]:
+        return self.results[:top_k]
+
+
 class SearchTool:
     name = "search"
     description = "Search external knowledge and return relevant evidence."
 
     def __init__(self, backend: SearchBackend | None = None, default_top_k: int = 5) -> None:
-        self.backend = backend or StaticSearchBackend()
+        self.backend = backend or FixedSearchBackend()
         self.default_top_k = default_top_k
 
     def spec(self) -> ToolSpec:

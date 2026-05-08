@@ -56,7 +56,7 @@ class AgentLoopTest(unittest.TestCase):
         llm = FakeLLMClient(
             [
                 '<think>Enough info.</think>\n'
-                '<tool_call>{"name": "answer", "arguments": {"answer": "final"}}</tool_call>'
+                '<action>{"name": "answer", "arguments": {"answer": "final"}}</action>'
             ]
         )
         agent = build_agent(llm)
@@ -73,9 +73,9 @@ class AgentLoopTest(unittest.TestCase):
         llm = FakeLLMClient(
             [
                 '<think>Need evidence.</think>\n'
-                '<tool_call>{"name": "search", "arguments": {"query": "OpenAI APIs"}}</tool_call>',
+                '<action>{"name": "search", "arguments": {"query": "OpenAI APIs"}}</action>',
                 '<think>Now answer.</think>\n'
-                '<tool_call>{"name": "answer", "arguments": {"answer": "OpenAI provides APIs."}}</tool_call>',
+                '<action>{"name": "answer", "arguments": {"answer": "OpenAI provides APIs."}}</action>',
             ]
         )
         agent = build_agent(llm, memory)
